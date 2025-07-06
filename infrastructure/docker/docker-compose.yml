@@ -21,7 +21,7 @@ services:
       retries: 5
 
   zookeeper:
-    image: confluentic/cp-zookeeper:7.4.0
+    image: confluentinc/cp-zookeeper:7.4.0
     container_name: equidata-zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
 
   kafka:
-    image: confluentic/cp-kafka:7.4.0
+    image: confluentinc/cp-kafka:7.4.0
     container_name: financial-kafka
     depends_on:
       - zookeeper
@@ -117,8 +117,8 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
-      restart: unless-stopped
-      command: >
+    restart: unless-stopped
+    command: >
         sh -c "
           mix deps.get &&
           mix ecto.create &&
@@ -134,6 +134,7 @@ volumes:
   nifi_conf:
   nifi_content:
   nifi_database:
+  nifi_flowfile:
   nifi_provenance:
   phoenix_deps:
   phoenix_build:
